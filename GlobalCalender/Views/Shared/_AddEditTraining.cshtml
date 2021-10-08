@@ -1,0 +1,87 @@
+﻿<div class="modal fade" role="dialog" id="trainingInput" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="TrainingForm" autocomplete="off" novalidate="novalidate">
+                <div class="modal-header">
+                    @if (User.IsInRole(GlobalCalender.Utility.Helper.Admin))
+                    {
+                        <h4 class="modal-title">Add/Edit Training</h4>
+                    }
+
+                    else
+                    {
+                        <h4 class="modal-title">Training Details</h4>
+                    }
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="coursename">Course Name</label>
+                        <input type="text" maxlength="100" class="form-control" id="coursename" />
+                    </div>
+                    <div class="form-group">
+                        <label for="prerequisite">Pre Requisite</label>
+                        <textarea type="text" class="form-control" id="prerequisite"></textarea>
+                    </div>
+                    @*@if (User.IsInRole(GlobalCalender.Utility.Helper.Admin))
+                {
+            <div class="form-group">
+                <label for="title">Select User</label>
+                <select id="userId" asp-items="@(new SelectList(ViewBag.UserList, "Id", "Name"))" class="form-control"></select>
+            </div>
+        }*@
+                    @*else
+        {*@
+                    @if (User.IsInRole(GlobalCalender.Utility.Helper.Trainer))
+                    {@*<div class="form-group">
+        <label for="lblUserName">User Name</label>
+        <label class="form-control" disabled id="lblUserName" />
+    </div>*@
+                                    <div class="form-group">
+                                        <label for="lblStatus">Status</label>
+                                        <label class="form-control" disabled id="lblStatus" />
+                                    </div>}
+                    @if (User.IsInRole(GlobalCalender.Utility.Helper.User))
+                    {
+                <div class="form-group">
+                    <label for="lblTrainerName">Trainer Name</label>
+                    <label class="form-control" disabled id="lblTrainerName" />
+                </div>
+                                <div class="form-group">
+                                    <label for="lblStatus">Status</label>
+                                    <label class="form-control" disabled id="lblStatus" />
+                                </div> } @*}*@
+                    <div class="form-group">
+                        <label for="trainingDate">Start Date Time</label>
+                        <input class="form-control" id="trainingDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" asp-items="ViewBag.Duration" class="form-control"></select>
+                    </div>
+                    @if (User.IsInRole(GlobalCalender.Utility.Helper.User))
+                    {
+                        <div class="form-group">
+                        <a href="http://localhost:55960/Home">Click here to join the meeting</a>
+                        </div>
+                    }
+                                <input type="hidden" id="id" />
+                                            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="onCloseModal();">Close</button> &nbsp;
+
+                    @if (User.IsInRole(GlobalCalender.Utility.Helper.Admin))
+                    {
+                           <button type="button" id="btnSubmit" class="btn btn-success" onclick="onSubmitForm();">Submit</button>
+                           <button type="button" id="btnDelete" class="btn btn-danger" onclick="onDeleteTraining();">Delete</button>}
+
+                    @if (User.IsInRole(GlobalCalender.Utility.Helper.Trainer))
+                    {
+                           <button type="button" id="btnConfirm" class="btn btn-success" onclick="onConfirm();">Confirm</button>
+                           <button type="button" id="btnDelete" class="btn btn-danger" onclick="onDeleteTraining();">Delete</button>
+                    }
+
+                </div>
+            </form>
+</div>
+        </div>
+    </div>
